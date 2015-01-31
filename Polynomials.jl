@@ -1,4 +1,4 @@
-module Polynomial
+module Polynomials
 
 export Polynomial, deg, iszero, X, Y
 
