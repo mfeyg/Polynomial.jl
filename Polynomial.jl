@@ -1,3 +1,7 @@
+module Polynomial
+
+export Polynomial, deg, iszero, X, Y
+
 abstract Poly
 
 immutable Polynomial{T <: Union(Number, Poly)} <: Poly
@@ -79,3 +83,5 @@ Base.divrem(x::Number, y::Number) = (div(x,y), rem(x,y))
 
 Base.div(p::Polynomial, q::Polynomial) = divrem(p,q)[1]
 Base.rem(p::Polynomial, q::Polynomial) = divrem(p,q)[2]
+
+end
