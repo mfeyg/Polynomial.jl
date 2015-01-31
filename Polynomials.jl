@@ -1,6 +1,6 @@
 module Polynomials
 
-export Polynomial, deg, iszero, X, Y
+export Polynomial, deg, X, Y
 
 abstract Poly
 
