@@ -18,7 +18,7 @@ Base.copy{T}(p::Polynomial{T}) = Polynomial(copy(p.coeffs))
 
 Base.convert(::Type{Polynomial}, x) = if isa(x,Polynomial) x else Polynomial([x]) end
 
-Base.convert{R}(::Type{Polynomial{R}}, x) = Polynomial{R}([convert(R,a) for a in convert(Polynomial,x).coeffs])
+Base.convert{R}(::Type{Polynomial{R}}, x) = Polynomial{R}([convert(R,a) for a in Polynomial(x).coeffs])
 
 Base.promote_rule{T,R}(::Type{Polynomial{T}}, ::Type{Polynomial{R}}) = Polynomial{promote_type(T,R)}
 
