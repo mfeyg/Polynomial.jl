@@ -65,6 +65,7 @@ end
 
 euclid(a::Integer, b::Integer) = divrem(a,b)
 euclid(a::Real, b::Real) = (a/b,0)
+euclid(a::Complex, b::Complex) = (a/b,0)
 
 function euclid{T}(p::Polynomial{T}, q::Polynomial{T})
   if iszero(q)
