@@ -63,22 +63,25 @@ function deg(p::Polynomial)
   d - 1
 end
 
-function Base.divrem{T}(p::Polynomial{T}, q::Polynomial{T})
+euclid(a::Integer, b::Integer) = divrem(a,b)
+euclid(a::Real, b::Real) = (a/b,0)
+
+function euclid{T}(p::Polynomial{T}, q::Polynomial{T})
   if iszero(q)
     error("Divide by zero")
   elseif deg(q) > deg(p)
     (zero(p), p)
   else
-    (d,r) = divrem(p.coeffs[1+deg(p)], q.coeffs[1+deg(q)])
+    (d,r) = euclid(p.coeffs[1+deg(p)], q.coeffs[1+deg(q)])
     (d,r) = map(x -> Polynomial([x]), (d,r))
     d = d * X^(deg(p)-deg(q))
     r = r * X^deg(p)
-    (dd,rr) = divrem(p-(d*q+r), q)
+    (dd,rr) = euclid(p-(d*q+r), q)
     (d+dd,r+rr)
   end
 end
 
-Base.divrem(x::Union(Number,Poly), y::Union(Number,Poly)) = Base.divrem(promote(x,y)...)
+Base.divrem(x::Union(Number,Poly), y::Union(Number,Poly)) = euclid(promote(x,y)...)
 Base.divrem(x::Number, y::Number) = (div(x,y), rem(x,y))
 
 Base.div(p::Polynomial, q::Polynomial) = divrem(p,q)[1]
